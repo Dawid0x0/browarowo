@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
+from rest_framework import generics
 from .models import Place
+from .serializers import PlacePostSerializer
 
 # Create your views here.
 class PlaceList(ListView):
@@ -27,3 +29,7 @@ class PlaceList(ListView):
 class PlaceDetail(DetailView):
     model = Place
     
+class PlaceRudView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    serializer_class = PlacePostSerializer
+    queryset = Place.objects.all()
