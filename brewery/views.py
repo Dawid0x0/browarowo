@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from rest_framework import generics
 from .models import Place
-from .serializers import PlacePostSerializer
+from .serializers import PlaceSerializer
 
 # Create your views here.
 class PlaceList(ListView):
@@ -28,8 +28,16 @@ class PlaceList(ListView):
             
 class PlaceDetail(DetailView):
     model = Place
-    
-class PlaceRudView(generics.RetrieveUpdateDestroyAPIView):
+
+class PlaceListAPIView(generics.ListAPIView):
     lookup_field = 'pk'
-    serializer_class = PlacePostSerializer
+    serializer_class = PlaceSerializer
+    queryset = Place.objects.all()
+    
+    def get_serializer_context(self,*args,**kwargs):
+        return {'request':self.request}
+    
+class PlaceRUDView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    serializer_class = PlaceSerializer
     queryset = Place.objects.all()

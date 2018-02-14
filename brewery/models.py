@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from rest_framework.reverse import reverse
 
 class Place(models.Model):
     name = models.CharField(max_length=300)
@@ -14,3 +15,6 @@ class Place(models.Model):
     
     def __unicode__(self):
         return self.name
+        
+    def get_api_url(self,request=None):
+        return reverse('place-api-rud', kwargs={'pk':self.pk},request=request)
