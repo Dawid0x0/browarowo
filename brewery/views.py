@@ -4,11 +4,10 @@ from __future__ import unicode_literals
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from rest_framework import generics
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView
 from .models import Place
 from .serializers import PlaceSerializer
 
-# Create your views here.
 class PlaceList(ListView):
     model = Place
     template_name = 'brewery/place_list.html'
@@ -29,7 +28,7 @@ class PlaceList(ListView):
 class PlaceDetail(DetailView):
     model = Place
 
-class PlaceListAPIView(generics.ListAPIView):
+class PlaceListAPIView(ListAPIView):
     lookup_field = 'pk'
     serializer_class = PlaceSerializer
     queryset = Place.objects.all()
@@ -37,7 +36,21 @@ class PlaceListAPIView(generics.ListAPIView):
     def get_serializer_context(self,*args,**kwargs):
         return {'request':self.request}
     
-class PlaceRUDView(generics.RetrieveUpdateDestroyAPIView):
+class PlaceRUDView(RetrieveUpdateDestroyAPIView):
+    lookup_field = 'pk'
+    serializer_class = PlaceSerializer
+    queryset = Place.objects.all()
+    
+class PlaceAPICreate(CreateAPIView):
+    serializer_class = PlaceSerializer
+    queryset = Place.objects.all()
+    
+class PlaceAPIUpdate(RetrieveUpdateAPIView):
+    lookup_field = 'pk'
+    serializer_class = PlaceSerializer
+    queryset = Place.objects.all()
+    
+class PlaceAPIDelete(RetrieveDestroyAPIView):
     lookup_field = 'pk'
     serializer_class = PlaceSerializer
     queryset = Place.objects.all()
