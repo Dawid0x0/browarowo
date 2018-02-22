@@ -14,7 +14,7 @@ class Place(models.Model):
     street = models.CharField(max_length=200,blank=True,null=True)
     number = models.CharField(max_length=10,blank=True,null=True)
     www = models.URLField(blank=True,null=True)
-    slug = models.SlugField(max_length=300)
+    slug = models.SlugField(max_length=300,unique=True,blank=True,null=True)
     timestamps = models.DateField(auto_now_add=True)
     
     def __unicode__(self):
@@ -25,9 +25,12 @@ class Place(models.Model):
 
 @receiver(pre_save, sender=Place)
 def my_handler(sender, instance, *args, **kwargs):
-	slug = slugify(instance.name)
-	slug_exists = Place.objects.filter(slug=slug).exists()
-	if slug_exists:
-		instance.slug = random_slug(slug)
-	else:
-		instance.slug = slug
+    if not instance.slug:
+        slug = slugify(instance.name)
+        slug_exists = sender.objects.filter(slug=slug).exists()
+        if slug_exists:
+            instance.slug = random_slug(slug)
+        else:
+            instance.slug = slug
+    else:
+        instance.slug = instance.slug
