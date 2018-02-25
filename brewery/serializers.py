@@ -11,3 +11,8 @@ class PlaceSerializer(serializers.ModelSerializer):
     def get_url(self,obj):
         request = self.context.get('request')
         return obj.get_api_url(request=request)
+        
+class PlaceMapViewAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Place
+        fields = ['name','city','street','number']

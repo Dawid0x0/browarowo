@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="container">
       <div class="row">
 
         <!-- Post Content Column -->
@@ -29,4 +30,40 @@
           </div>
          </div>
       </div>
+    </div>
+    <div id="map" style="width: 100%; height: 500px;"></div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+/*
+I know that this solution is art for art. In this case, json is not the best solution when you can retrieving this data from a Django variables... but it is REST ;)
+*/
+function initMap(){
+    var address;
+    var rest_url = "http://165.227.234.172:81/api/place/{{ object.slug }}/?format=json";
+    
+    $.getJSON(rest_url, function(data) {
+        address = "Polska, "+ data['city'] +", "+ data['street'] +" "+ data['number'] +", "+  data['name'];
+    }).done(function() {
+        var geocoder = new google.maps.Geocoder();
+        var mapOptions = {
+            zoom: 17,
+        }
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    });
+}
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0t-1Z92vKM7aIx9nG-wb4ALY-ArTALbE&callback=initMap"></script>
 {% endblock %}

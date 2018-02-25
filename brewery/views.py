@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveAPIView
 from .models import Place
-from .serializers import PlaceSerializer
+from .serializers import PlaceSerializer, PlaceMapViewAddressSerializer
 
 class PlaceList(ListView):
     model = Place
@@ -53,4 +53,9 @@ class PlaceAPIUpdate(RetrieveUpdateAPIView):
 class PlaceAPIDelete(RetrieveDestroyAPIView):
     lookup_field = 'pk'
     serializer_class = PlaceSerializer
+    queryset = Place.objects.all()
+    
+class PlaceMapsAddressView(RetrieveAPIView):
+    lookup_field = 'slug'
+    serializer_class = PlaceMapViewAddressSerializer
     queryset = Place.objects.all()
