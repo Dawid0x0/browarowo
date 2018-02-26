@@ -41,7 +41,7 @@ I know that this solution is art for art. In this case, json is not the best sol
 */
 function initMap(){
     var address;
-    var rest_url = "http://165.227.234.172:81/api/place/{{ object.slug }}/?format=json";
+    var rest_url = "/api/place/{{ object.slug }}/?format=json";
     
     $.getJSON(rest_url, function(data) {
         address = "Polska, "+ data['city'] +", "+ data['street'] +" "+ data['number'] +", "+  data['name'];

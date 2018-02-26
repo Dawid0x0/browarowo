@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, UpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveAPIView
@@ -11,11 +12,18 @@ from .serializers import PlaceSerializer, PlaceMapViewAddressSerializer
 class PlaceList(ListView):
     model = Place
     template_name = 'brewery/place_list.html'
+    paginate_by = 4
     
     def get_queryset(self):
         places = Place.objects.all()
+        
+        #page = self.request.GET.get('page')
+        search = self.request.GET.get('search')
+        
+        if search is not None:
+            places = places.filter(Q(name__icontains=search))
+        """
         paginator = Paginator(places, 4)
-        page = self.request.GET.get('page')
         
         try:
             place = paginator.page(page)
@@ -24,7 +32,8 @@ class PlaceList(ListView):
         except EmptyPage:
             place = paginator.page(paginator.num_pages)
         return place
-            
+            """
+        return places
 class PlaceDetail(DetailView):
     model = Place
 
