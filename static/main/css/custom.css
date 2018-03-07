@@ -1,0 +1,143 @@
+body {
+    background: #edead9;
+    color: #535353;
+    font-family: "Open Sans";
+}
+
+h1, h2 {
+    color: #b7c136;
+    font-family: "Bowlby One SC";
+}
+
+a {
+    color: #41aabf;
+}
+
+a:hover {
+    color: #1C6472;
+    text-decoration:none;
+}
+
+.navbar {
+    padding:0;
+}
+
+.bg-custom {
+    background-color: #292929 !important;
+}
+
+.navbar-brand {
+    font-family: "Bowlby One SC";
+    font-size: 30px;
+    display: block;
+    padding: 30px;
+    background-color: #41aabf;
+    color: #292929 !important;
+}
+/* Search */
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #ec8916 !important;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: #ec8916 !important;
+  color: #ffffff;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid transparent;
+	background: #b7c136;
+	font-weight: normal;
+	color: #ffffff;
+}
+
+/* List */
+.jumbotron {
+    background-image: url("../../main/img/hop.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    border-radius: 0;
+    background-color:#292929;
+}
+
+.row-list {
+    padding:10px 0;
+}
+
+.row-footer {
+    padding: 15px 0;
+    border-bottom: 1px solid #a09f96;
+}
+/* Button */
+
+.btn-blue {
+    color: #fff;
+    background-color: #41aabf;
+    /*border-color: #3893A5;*/
+}
+
+.btn-blue:hover {
+    color: #fff;
+    background-color: #1C6472;
+    /*border-color: #164E58;*/
+}
+
+/* Pagination */
+.pagination .disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.pagination .disabled a {
+    color:#535353;
+}
+.pagination a {
+    padding: 8px;
+    decoration:none;
+}
