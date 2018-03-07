@@ -2,10 +2,8 @@
 
 {% block content %}
     <div class="container">
-      <div class="row">
 
         <!-- Post Content Column -->
-        <div class="col-lg-8">
 
           <!-- Title -->
           <h1 class="mt-4">{{ object.name }}</h1>
@@ -26,10 +24,9 @@
           
           <hr>
           <div class="mb-4">
-            <a href="{% url 'place-list' %}" class="btn btn-primary">&larr; Powrót</a>
+            <a href="{% url 'place-list' %}" class="btn btn-blue">&larr; Powrót</a>
           </div>
-         </div>
-      </div>
+        
     </div>
     <div id="map" style="width: 100%; height: 500px;"></div>
 {% endblock %}

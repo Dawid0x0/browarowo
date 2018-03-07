@@ -22,18 +22,8 @@ class PlaceList(ListView):
         
         if search is not None:
             places = places.filter(Q(name__icontains=search))
-        """
-        paginator = Paginator(places, 4)
-        
-        try:
-            place = paginator.page(page)
-        except PageNotAnInteger:
-            place = paginator.page(1)
-        except EmptyPage:
-            place = paginator.page(paginator.num_pages)
-        return place
-            """
         return places
+        
 class PlaceDetail(DetailView):
     model = Place
 

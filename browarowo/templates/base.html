@@ -1,27 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'main/css/custom.css' %}">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Bowlby One SC' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
   </head>
   <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1 class="my-4">Browarowo - <small>Browary w Polsce</small></h1>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Browarowo</a>
+
+        <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">&nbsp;</ul>
+        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'place-list' %}">
+            <div class="autocomplete" style="width:228px;">
+          <input id="search" name="search" class="form-control mr-sm-2 dropdown show" type="text" placeholder="Szukaj..." aria-label="Szukaj">
             </div>
+          <button class="btn btn-blue my-2 my-sm-0" type="submit">Szukaj</button>
+        </form>
         </div>
-    </div>
+      </div>
+    </nav>
+  
+
     {% block content %}
     {% endblock %}
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-custom">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Browarowo 2018</p>
       </div>
@@ -30,6 +46,20 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    var names;
+    $.getJSON("/api/place/?format=json", function(data) {
+        names = $.map(data, function(val,key){
+            return val['name'];
+        });
+    }).done(function(){
+        $('#search').autocomplete({
+            source: names,
+            minLength: 3
+        });
+    });
+    </script>
     {% block javascript %}
     {% endblock %}
   </body>
