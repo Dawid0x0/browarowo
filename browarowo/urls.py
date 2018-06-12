@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^brewery/', include('brewery.urls')),
-    url(r'^api/place/', include('brewery.apiurls')),
+    url(r'^api/place/', include('brewery.api.urls')),
 ]

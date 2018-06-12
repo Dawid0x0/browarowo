@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from .views import PlaceList,PlaceDetail,PlaceRUDView,PlaceListAPIView,PlaceAPICreate,PlaceAPIUpdate,PlaceAPIDelete,PlaceMapsAddressView
+from .views import PlaceRUDView,PlaceListAPIView,PlaceAPICreate,PlaceAPIUpdate,PlaceAPIDelete,PlaceMapsAddressView
 
 urlpatterns = [
     url(r'^$', PlaceListAPIView.as_view(), name='place-api-list'),

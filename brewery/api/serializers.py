@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Place
+from brewery.models import Place
 
 class PlaceSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField(read_only=True)
@@ -10,7 +10,7 @@ class PlaceSerializer(serializers.ModelSerializer):
         
     def get_url(self,obj):
         request = self.context.get('request')
-        return obj.get_api_url(request=request)
+        return obj.get_absolute_api_url()
         
 class PlaceMapViewAddressSerializer(serializers.ModelSerializer):
     class Meta:
