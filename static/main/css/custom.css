@@ -141,3 +141,10 @@ a.ui-button:active,
     padding: 8px;
     decoration:none;
 }
+
+.img-404 {
+  height: 800px;
+  background-image: url("../../main/img/404beer.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
