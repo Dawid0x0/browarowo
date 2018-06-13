@@ -1,7 +1,7 @@
 # Browarowo
 [Browarowo](http://browarowo.com.pl/) is a website based on **CMS Django**. The projekt's model is prepared for the list of breweries containing name and location.
 
-The main purpose of this project is build REST API.
+The main purpose of this project is build REST API using **Django REST Framework**.
 ```
 http://browarowo.com.pl/api/place/
 ```
