@@ -1,5 +1,6 @@
 [run]
-omit = 
+omit =
+    *__init__.py
     *apps.py,
     *migrations/*,
     *settings*,
